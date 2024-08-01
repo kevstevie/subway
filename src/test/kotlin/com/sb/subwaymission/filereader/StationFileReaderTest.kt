@@ -1,5 +1,6 @@
 package com.sb.subwaymission.filereader
 
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.TestConstructor
@@ -9,7 +10,7 @@ import org.springframework.test.context.TestConstructor
 class StationFileReaderTest(private val stationFileReader: StationFileReader) {
 
     @Test
-    fun a() {
+    fun json_파싱_테스트() {
         val json = stationFileReader.stringToJsonData("""
             {
             "DESCRIPTION" : {"STATION_NM":"전철역명","STATION_CD":"전철역코드","STATION_NM_CHN":"전철명명(중문)","LINE_NUM":"호선","FR_CODE":"외부코드","STATION_NM_JPN":"전철명명(일문)","STATION_NM_ENG":"전철명명(영문)"},
@@ -22,7 +23,7 @@ class StationFileReaderTest(private val stationFileReader: StationFileReader) {
             }
         """.trimIndent())
 
-        println(json)
+        assertThat(json).hasSize(3)
     }
 }
 
