@@ -4,8 +4,12 @@ import org.springframework.data.annotation.Id
 
 class Station(
         @Id
-        val id: Long,
+        var id: Long? = null,
 
-        val name: String
+        val name: String,
+
+        val code: String,
+
+        val line: String
 ) {
 }

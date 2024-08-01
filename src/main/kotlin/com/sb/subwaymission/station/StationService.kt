@@ -12,5 +12,5 @@ class StationService(
 
     @Transactional(readOnly = true)
     fun findAll(page: Int) = stationRepository.findAllByOrderByName(PageRequest.of(page, 10))
-            .map { StationResponse(it.id, it.name) }
+            .map { StationResponse(it.id!!, it.name) }
 }
