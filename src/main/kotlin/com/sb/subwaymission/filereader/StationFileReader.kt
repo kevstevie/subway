@@ -4,11 +4,19 @@ import com.sb.subwaymission.station.Station
 import com.sb.subwaymission.station.StationRepository
 import kotlinx.serialization.json.Json
 import org.springframework.stereotype.Component
+import org.springframework.transaction.annotation.Transactional
 import java.io.File
 import java.io.InputStreamReader
 
 @Component
 class StationFileReader(private val stationRepository: StationRepository) {
+
+    @Transactional
+    fun readFileAndSave(file: File) {
+        val json = readFile(file)
+        val data = stringToJsonData(json)
+        save(data)
+    }
 
     fun readFile(file: File): String {
         val reader: InputStreamReader = file.inputStream().reader()
